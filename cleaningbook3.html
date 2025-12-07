@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="phone">
+        <div class="container">
+
+            <div class="slider">
+
+                <div class="slide">
+                    <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                </div>
+            </div>
+        </div>
+
+       
+
+
+        <!-- CONTENT -->
+        <div class="content-box">
+
+            <div class="header-row">
+                <h2> Laundry Services</h2>
+                <!-- <i class="fa-regular fa-bookmark save"></i> -->
+            </div>
+
+            <div class="user-row">
+                <h3 class="name">Jenny Wilson</h3>
+
+                <div class="rating">
+                    <i class="fa-solid fa-star star"></i>
+                    <span>4.8 (4,479 reviews)</span>
+                </div>
+            </div>
+
+            <div class="tag-row">
+                <span class="tag">Cleaning</span>
+                <span class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    255 Grand Park Avenue, New York
+                </span>
+            </div>
+
+            <p class="price">$20 <small>(Floor price)</small></p>
+
+            <hr>
+
+            <h3 class="section-title">About me</h3>
+            <p class="about-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim nisi ut aliquip.
+                <!-- <span class="read">Read more...</span> -->
+            </p>
+
+            
+            <!-- BOTTOM BUTTONS -->
+            <div class="button-row">
+                <a class="msg-btn" href="https://wa.me/916381893332?text=Hi Bro"
+                    class="btn btn-dark btn-lg text-uppercase" id="m">Message</a>
+                <button class="book-btn" onclick="document.location='muthubook3.html'">Book Now</button>
+            </div>
+
+        </div>
+
+</body>
+
+</html>
+<style>
+    body {
+        background: #000;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        list-style-type: none;
+        /* padding: 30px 0; */
+    }
+
+    .phone {
+        width: 390px;
+        background: #1F1F24;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 670px;
+    }
+
+    
+
+    .slider {
+        display: flex;
+        gap: 1rem;
+        width: max-content;
+        animation: sliderMove 12s linear infinite;
+    }
+
+    .slide {
+        width: 200px;
+        flex-shrink: 0;
+        text-align: center;
+    }
+
+    .slide img {
+        width: 95%;
+        margin-top: 20px;
+    }
+
+    .slide h2 {
+        margin-top: 20px;
+        font-size: 22px;
+        line-height: 30px;
+        color: #fff;
+    }
+
+    .next-btn {
+        width: 100%;
+        background: #a020f0;
+        padding: 14px;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        width: 80%;
+        margin: auto;
+        transition: 0.3s;
+    }
+
+    .next-btn:hover {
+        background: #b133ff;
+    }
+
+    @keyframes sliderMove {
+        0% {
+            transform: translateX(0);
+        }
+
+        33% {
+            transform: translateX(-320px);
+        }
+
+        66% {
+            transform: translateX(-640px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* IMAGE PART */
+    .top-image {
+        position: relative;
+    }
+
+    .top-image img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+    }
+
+    .back {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 22px;
+        color: #fff;
+    }
+
+    .dots {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 7px;
+        height: 7px;
+        background: #ccc;
+        border-radius: 50%;
+        opacity: 0.5;
+    }
+
+    .dot.active {
+        width: 12px;
+        border-radius: 8px;
+        opacity: 1;
+    }
+
+    /* CONTENT */
+    .content-box {
+        padding: 20px 22px;
+        color: #fff;
+    }
+
+    .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-row h2 {
+        font-size: 24px;
+    }
+
+    .save {
+        font-size: 22px;
+        color: #A855F7;
+    }
+
+    /* USER INFO */
+    .user-row {
+        margin-top: 5px;
+    }
+
+    .name {
+        color: #C084FC;
+        margin: 5px 0;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #d4d4d4;
+    }
+
+    .star {
+        color: #FFD54F;
+    }
+
+    /* TAGS */
+    .tag-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        background: #2D2A35;
+        padding: 4px 10px;
+        border-radius: 8px;
+        color: #C084FC;
+        font-size: 13px;
+    }
+
+    .location {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #ccc;
+        font-size: 13px;
+    }
+
+    .price {
+        font-size: 22px;
+        margin-top: 12px;
+        color: #A855F7;
+    }
+
+    .price small {
+        color: #aaa;
+    }
+
+    /* ABOUT */
+    .section-title {
+        margin-top: 18px;
+        margin-bottom: 6px;
+    }
+
+    .about-text {
+        color: #ccc;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .read {
+        color: #A855F7;
+    }
+
+    /* PHOTOS */
+    .photos-header {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .see-all {
+        color: #A855F7;
+        font-size: 14px;
+    }
+
+    .photo-gallery {
+        margin-top: 12px;
+        display: flex;
+        gap: 12px;
+    }
+
+    .photo-gallery img {
+        width: 110px;
+        height: 70px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    /* BUTTONS */
+    .button-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 18px 22px 30px;
+        background: #1F1F24;
+    }
+
+    .msg-btn {
+        width: 48%;
+        padding: 14px;
+        background: #2C2C33;
+        border: none;
+        color: #fff;
+        border-radius: 18px;
+        font-size: 15px;
+    }
+
+    .book-btn {
+        width: 48%;
+        padding: 14px;
+        background: #A855F7;
+        border: none;
+        color: #fff;
+        border-radius: 18px;
+        font-size: 15px;
+    }
+
+    #m {
+        text-decoration: none;
+        color: white;
+        width: 35%;
+        padding: 17px;
+        background: #A855F7;
+        border: none;
+        color: #fff;
+        text-align: center;
+        border-radius: 18px;
+        font-size: 15px;
+
+
+    }
+</style>

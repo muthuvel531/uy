@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundry Services</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <div class="header">
+            <i class="fa fa-arrow-left" onclick="document.location='home.html'"></i>
+            <!-- <h2>Laundry</h2>
+            <i class="fa fa-search"></i> -->
+        </div>
+        <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="piumbing" onkeyup="search()" id="search-item">
+            <i class="fa fa-sliders"></i>
+        </div>
+
+        <!-- Results Header
+         <div class="results-header">
+            <p>Results for <span>"Cleaning"</span></p>
+            <p class="count">3,627 founds</p>
+        </div> -->
+
+
+        <!-- CARD LIST -->
+        <div class="list">
+
+            <!-- CARD 1 -->
+            <div class="card">
+                <div class="img-box" style="background:#90D5E1;">
+                    <img src="https://i.ibb.co/1b7R1x5/laundry1.png">
+                </div>
+                <div class="info">
+                    <p class="name">Jane Cooper</p>
+                    <h3>Plumbing Repairing</h3>
+                    <p class="price">$21</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.8 | 3,824 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="card">
+                <div class="img-box" style="background:#99DFFF;">
+                    <img src="https://i.ibb.co/nR49FJx/laundry2.png">
+                </div>
+                <div class="info">
+                    <p class="name">Darron Kulikowski</p>
+                    <h3>Plumbing Services</h3>
+                    <p class="price">$23</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.9 | 6,182 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card">
+                <div class="img-box" style="background:#FF9AC0;">
+                    <img src="https://i.ibb.co/crRz0Nk/laundry3.png">
+                </div>
+                <div class="info">
+                    <p class="name">Chieko Chute</p>
+                    <h3></h3>
+                    <p class="price">$22</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.7 | 7,938 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="card">
+                <div class="img-box" style="background:#A8E5FF;">
+                    <img src="https://i.ibb.co/BfGKZp4/laundry4.png">
+                </div>
+                <div class="info">
+                    <p class="name">Tanner Stafford</p>
+                    <h3></h3>
+                    <p class="price">$22</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.7 | 7,938 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="card">
+                <div class="img-box" style="background:#F6BEA7;">
+                    <img src="https://i.ibb.co/47n7tqS/laundry5.png">
+                </div>
+                <div class="info">
+                    <p class="name">Leif Floyd</p>
+                    <h3></h3>
+                    <p class="price">$23</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.7 | 7,938 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        const search = () => {
+            const searchbox = document.getElementById("search-item").value.toUpperCase();
+            const product = document.querySelectorAll(".card");
+            const pname = document.getElementsByTagName("h3");
+
+            for (let i = 0; i < pname.length; i++) {
+                let match = product[i].getElementsByTagName("h3")[0];
+
+                if (match) {
+                    let textvalue = match.textContent || match.innerHTML;
+
+                    if (textvalue.toUpperCase().indexOf(searchbox) > -1) {
+                        product[i].style.display = "";
+                    } else {
+                        product[i].style.display = "none";
+                    }
+                }
+            }
+        };
+    </script>
+
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: #0F0F17;
+        padding: 20px;
+        color: white;
+    }
+
+    .app {
+        max-width: 420px;
+        margin: auto;
+    }
+
+    .search-box {
+        background: #1c1c27;
+        padding: 14px 18px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .search-box input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #eee;
+        font-size: 16px;
+    }
+
+    .search-box i {
+        color: #8b8b97;
+        font-size: 18px;
+    }
+
+    /* Results */
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 5px;
+        font-size: 16px;
+    }
+
+    .results-header span {
+        color: #b474ff;
+    }
+
+    .results-header .count {
+        color: #b474ff;
+    }
+
+    /* HEADER */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    .header h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .header i {
+        font-size: 20px;
+        color: white;
+    }
+
+    /* LIST */
+    .list {
+        margin-top: 10px;
+    }
+
+    /* CARD */
+    .card {
+        background: #1C1C27;
+        padding: 18px;
+        border-radius: 24px;
+        margin-bottom: 22px;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        position: relative;
+    }
+
+    .img-box {
+        width: 85px;
+        height: 85px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* TEXT AREA */
+    .info .name {
+        font-size: 13px;
+        opacity: 0.75;
+        margin-bottom: 3px;
+    }
+
+    .info h3 {
+        font-size: 17px;
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
+
+    .price {
+        color: #B474FF;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .rating {
+        font-size: 13px;
+        opacity: 0.85;
+    }
+
+    .rating i {
+        color: gold;
+        margin-right: 6px;
+    }
+
+    /* Bookmark */
+    .bookmark {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 22px;
+        color: #B474FF;
+    }
+</style>

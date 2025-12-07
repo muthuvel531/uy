@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+</head>
+
+
+
+<body>
+
+    <div class="container">
+<form id="contactForm">
+        <h2 class="title">Booking Details</h2>
+        <h2 id="myTitle">House Cleaning</h2>
+        <p class="price" id="Vel">price:₹400 <small>(Floor price)</small></p>
+
+
+      
+
+    
+        <h4 class="section-title">Select Date</h4>
+        
+        <div class="calendar-box">
+            <div class="calendar-header">
+                <h3 id="calendarMonth">January 2026</h3>
+                <div class="cal-arrows">
+                    <span id="prevMonth">&lt;</span>
+                    <span id="nextMonth">&gt;</span>
+                </div>
+            </div>
+        
+            <div class="weekdays">
+                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+            </div>
+        
+            <div class="days" id="calendarDays"></div>
+        </div>
+
+
+        <!-- Contact -->
+        <h4 class="section-title">Contact</h4>
+
+        <div class="promo-box"><input type="text" placeholder="Enter Name" id="name" required></div>
+        <div class="promo-box"><input type="number" placeholder="Enter PhoneNumber" id="number" required></div>
+        <div class="promo-box"><input type="text" placeholder="Enter Address" id="address" required></div>
+
+        <!-- <div class="footer-btn" type="submit">Continue</div> -->
+        <button class="footer-btn" type="submit">Continue</button>
+       
+
+    </div>
+    </form>
+
+   
+        
+    </body>
+    
+    </html>
+    
+    
+ 
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+
+<script>
+    let currentYear = 2026;
+    let currentMonth = 0; // January
+
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    let selectedFullDate = ""; // Will store yyyy-mm-dd
+
+    function renderCalendar() {
+        const daysContainer = document.getElementById("calendarDays");
+        const monthLabel = document.getElementById("calendarMonth");
+
+        monthLabel.innerText = `${monthNames[currentMonth]} ${currentYear}`;
+        daysContainer.innerHTML = "";
+
+        let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        if (firstDay === 0) firstDay = 7; // Adjust Sunday to end
+
+        const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+        // Empty cells
+        for (let i = 1; i < firstDay; i++) {
+            const empty = document.createElement("span");
+            empty.classList.add("empty");
+            daysContainer.appendChild(empty);
+        }
+
+        // Actual days
+        for (let d = 1; d <= totalDays; d++) {
+            const day = document.createElement("span");
+            day.innerText = d;
+
+            day.addEventListener("click", function () {
+                document.querySelectorAll("#calendarDays span").forEach(s => {
+                    s.style.background = "transparent";
+                });
+
+                day.style.background = "#6e32f9";
+
+                selectedFullDate =
+                    `${d}-${monthNames[currentMonth]}-${currentYear}`;
+            });
+
+            daysContainer.appendChild(day);
+        }
+    }
+
+    // Next / Prev Controls
+    document.addEventListener("DOMContentLoaded", () => {
+        renderCalendar();
+
+        document.getElementById("prevMonth").addEventListener("click", () => {
+            if (currentMonth > 0) currentMonth--;
+            else { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        });
+
+        document.getElementById("nextMonth").addEventListener("click", () => {
+            if (currentMonth < 11) currentMonth++;
+            else { currentMonth = 0; currentYear++; }
+            renderCalendar();
+        });
+    });
+</script>
+
+
+ 
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyCqFIyVhPXx1r5W4fJM4nOii09AIxi0vKQ",
+        authDomain: "contactform-85948.firebaseapp.com",
+        databaseURL: "https://contactform-85948-default-rtdb.firebaseio.com",
+        projectId: "contactform-85948",
+        storageBucket: "contactform-85948.firebasestorage.app",
+        messagingSenderId: "901007557564",
+        appId: "1:901007557564:web:25b92b3224f24d85be21b9"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    var contactFormDB = firebase.database().ref("booking");
+
+    // ⭐ USE selectedFullDate from your dynamic calendar
+    document.getElementById("contactForm").addEventListener("submit", submitForm);
+
+    function submitForm(e) {
+        e.preventDefault();
+
+        if (selectedFullDate === "") {
+            alert("Please select a date before continuing.");
+            return;
+        }
+
+        var name = getElementVal("name");
+        var number = getElementVal("number");
+        var address = getElementVal("address");
+
+        var serviceName = document.getElementById("myTitle").innerText;
+        var price = document.getElementById("Vel").innerText;
+        var monthYear = document.getElementById("calendarMonth").innerText;
+
+        saveMessages(name, number, address, selectedFullDate, serviceName, monthYear, price);
+
+        window.location.href = "sumite.html";
+
+        document.getElementById("contactForm").reset();
+    }
+
+    const saveMessages = (name, number, address, date, title, month, price) => {
+        var newBooking = contactFormDB.push();
+
+        newBooking.set({
+            name: name,
+            number: number,
+            address: address,
+            selectedDate: date,
+            title: title,
+            monthDisplayed: month,
+            price: price
+        });
+    };
+
+    const getElementVal = (id) => {
+        return document.getElementById(id).value;
+    };
+</script>
+
+
+
+<script>
+    window.onload = function () {
+
+        const data = JSON.parse(localStorage.getItem("bookingData"));
+
+        if (!data) return;
+
+        document.getElementById("myTitle").innerText = data.service;
+        document.getElementById("Vel").innerText = "Price: " + data.price;
+    };
+</script>
+
+<script>
+    window.onload = function () {
+        const data = JSON.parse(localStorage.getItem("bookingData"));
+        if (!data) return;
+
+        document.getElementById("workerName").innerText = data.name;
+        document.getElementById("serviceName").innerText = data.service;
+        document.getElementById("servicePrice").innerText = data.price;
+    };
+</script>
+
+
+<style>
+    body { 
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #0f0f15;
+        color: white;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+    .price{
+        font-size: 30px;
+        color:chartreuse;
+        
+    }
+
+    .container {
+        width: 100%;
+        max-width: 360px;
+        padding: 25px;
+        color: #fff;
+        border-radius: 25px;
+        box-shadow: 0 0 10px #c9a5ff;
+        background: #14141d;
+    }
+    #myTitle{
+        margin-bottom: -20px;
+        font-weight: 600;
+        font-size: 24px;
+        color:chartreuse;
+    }
+
+    .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    .section-title {
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    /* Calendar */
+    .calendar-box {
+        background: #1c1c27;
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        /* font-size: 18px; */
+        margin-bottom: 15px;
+    }
+
+    .cal-arrows span {
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .weekdays,
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+    }
+
+    .weekdays span {
+        opacity: 0.6;
+    }
+
+    .days span {
+        padding: 10px 0;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .days span:hover {
+        background: #6e32f9;
+    }
+
+    /* Working Hours */
+    .hours-box {
+        margin-top: 20px;
+        background: #1c1c27;
+        padding: 20px;
+        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hours-text p {
+        font-size: 12px;
+        opacity: 0.6;
+    }
+
+    .hours-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .hours-controls button {
+        width: 35px;
+        height: 35px;
+        border: none;
+        background: #292936;
+        color: white;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Contact Input */
+    .promo-box {
+        margin-top: 10px;
+        background: #1c1c27;
+        padding: 12px 15px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+    }
+
+    .promo-box input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: white;
+        height: 40px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    /* Button */
+    .footer-btn {
+        margin-top: 30px;
+        border-radius: 40px;
+        padding: 18px 100px 18px 100px;
+        text-align: center;
+        background: #8f4cff;
+        font-size: 18px;
+        margin-left: 40px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+    }
+
+    .footer-btn:hover {
+        background: #7b35ff;
+    }
+</style>

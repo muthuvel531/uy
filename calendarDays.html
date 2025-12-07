@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h4 class="section-title">Select Date</h4>
+
+<div class="calendar-box">
+    <div class="calendar-header">
+        <h3 id="calendarMonth">January 2026</h3>
+        <div class="cal-arrows">
+            <span id="prevMonth">&lt;</span>
+            <span id="nextMonth">&gt;</span>
+        </div>
+    </div>
+
+    <div class="weekdays">
+        <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+    </div>
+
+    <div class="days" id="calendarDays"></div>
+</div>
+<script>
+    let currentYear = 2026;
+    let currentMonth = 0; // January
+
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    let selectedFullDate = ""; // Will store yyyy-mm-dd
+
+    function renderCalendar() {
+        const daysContainer = document.getElementById("calendarDays");
+        const monthLabel = document.getElementById("calendarMonth");
+
+        monthLabel.innerText = `${monthNames[currentMonth]} ${currentYear}`;
+        daysContainer.innerHTML = "";
+
+        let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        if (firstDay === 0) firstDay = 7; // Adjust Sunday to end
+
+        const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+        // Empty cells
+        for (let i = 1; i < firstDay; i++) {
+            const empty = document.createElement("span");
+            empty.classList.add("empty");
+            daysContainer.appendChild(empty);
+        }
+
+        // Actual days
+        for (let d = 1; d <= totalDays; d++) {
+            const day = document.createElement("span");
+            day.innerText = d;
+
+            day.addEventListener("click", function () {
+                document.querySelectorAll("#calendarDays span").forEach(s => {
+                    s.style.background = "transparent";
+                });
+
+                day.style.background = "#6e32f9";
+
+                selectedFullDate =
+                    `${d}-${monthNames[currentMonth]}-${currentYear}`;
+            });
+
+            daysContainer.appendChild(day);
+        }
+    }
+
+    // Next / Prev Controls
+    document.addEventListener("DOMContentLoaded", () => {
+        renderCalendar();
+
+        document.getElementById("prevMonth").addEventListener("click", () => {
+            if (currentMonth > 0) currentMonth--;
+            else { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        });
+
+        document.getElementById("nextMonth").addEventListener("click", () => {
+            if (currentMonth < 11) currentMonth++;
+            else { currentMonth = 0; currentYear++; }
+            renderCalendar();
+        });
+    });
+</script>
+</body>
+</html>
+
+ <style>
+ 
+    body { 
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #0f0f15;
+        color: white;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+    .price{
+        font-size: 30px;
+        color:chartreuse;
+        
+    }
+
+    .container {
+        width: 100%;
+        max-width: 360px;
+        padding: 25px;
+        color: #fff;
+        border-radius: 25px;
+        box-shadow: 0 0 10px #c9a5ff;
+        background: #14141d;
+    }
+    #myTitle{
+        margin-bottom: -20px;
+        font-weight: 600;
+        font-size: 24px;
+        color:chartreuse;
+    }
+
+    .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    .section-title {
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    /* Calendar */
+    .calendar-box {
+        background: #1c1c27;
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        /* font-size: 18px; */
+        margin-bottom: 15px;
+    }
+
+    .cal-arrows span {
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .weekdays,
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+    }
+
+    .weekdays span {
+        opacity: 0.6;
+    }
+
+    .days span {
+        padding: 10px 0;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .days span:hover {
+        background: #6e32f9;
+    }
+
+    /* Working Hours */
+    .hours-box {
+        margin-top: 20px;
+        background: #1c1c27;
+        padding: 20px;
+        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hours-text p {
+        font-size: 12px;
+        opacity: 0.6;
+    }
+
+    .hours-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .hours-controls button {
+        width: 35px;
+        height: 35px;
+        border: none;
+        background: #292936;
+        color: white;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Contact Input */
+    .promo-box {
+        margin-top: 10px;
+        background: #1c1c27;
+        padding: 12px 15px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+    }
+
+    .promo-box input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: white;
+        height: 40px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    /* Button */
+    .footer-btn {
+        margin-top: 30px;
+        border-radius: 40px;
+        padding: 18px 100px 18px 100px;
+        text-align: center;
+        background: #8f4cff;
+        font-size: 18px;
+        margin-left: 40px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+    }
+
+    .footer-btn:hover {
+        background: #7b35ff;
+    }
+</style>
+ </style>

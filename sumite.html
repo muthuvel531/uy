@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        body {
+            margin: 0;
+            background: #0c0c14;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .popup-card {
+            width: 330px;
+            height: 350px;
+            background: #1b1b27;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(138, 60, 255, 0.3);
+            animation: fadein 0.6s ease-in-out;
+        }
+
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .success-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9b4dff, #6e32f9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            font-size: 45px;
+            color: white;
+            position: relative;
+            box-shadow: 0 0 30px rgba(137, 44, 255, 0.5);
+        }
+
+        .success-title {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #b68cff;
+        }
+
+        .success-msg {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .btn {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 35px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #9b4dff, #6e32f9);
+            color: white;
+        }
+
+        .primary-btn:hover {
+            opacity: 0.85;
+        }
+
+        .secondary-btn {
+            background: #2c2c39;
+            color: #d6d6d6;
+        }
+
+        .secondary-btn:hover {
+            background: #3a3a49;
+        }
+         /* .button-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 18px 22px 30px;
+        background: #1F1F24;
+    }
+
+    .msg-btn {
+        width: 48%;
+        padding: 14px;
+        background: #2C2C33;
+        border: none;
+        color: #fff;
+        border-radius: 18px;
+        font-size: 15px;
+    }
+
+    .book-btn {
+        width: 48%;
+        padding: 14px;
+        background: #A855F7;
+        border: none;
+        color: #fff;
+        border-radius: 18px;
+        font-size: 15px;
+    } */
+
+    #m {
+        text-decoration: none;
+        /* color: white;
+        width: 35%;
+        padding: 17px;
+        background: #A855F7;
+        border: none;
+        color: #fff;
+        text-align: center;
+        border-radius: 18px;
+        font-size: 15px; */
+         margin-top: 50px;
+            padding: 14px 95px 14px 95px;
+           position: relative;
+           top:30px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 35px;
+            width: 100%;
+            font-weight: 200;
+            background: linear-gradient(135deg, #9b4dff, #6e32f9);
+            color: white;
+    }
+    #m:hover{
+        opacity: 0.85;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div class="popup-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2 class="success-title">Booking Successful!</h2>
+        <p class="success-msg">You have successfully made payment and booked the services.</p>
+
+        <button class="btn primary-btn" onclick="document.location='home.html'">View E-Receipt</button>
+       
+<a class="msg-btn" href="https://wa.me/916381893332?text=Hi Bro" class="btn btn-dark btn-lg text-uppercase"
+    id="m">Message Workers</a>
+    </div>
+
+    <!-- <script>
+        function viewReceipt() {
+            alert("Opening E-Receipt...");
+            // window.location = "receipt.html";
+        }
+        function messageWorker() {
+            alert("Opening Chat...");
+            // window.location = "chat.html";
+        }
+    </script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="containe">
+
+       
+
+        <h1>Create your<br>Account</h1>
+
+        <div class="container">
+        <form id="contactForm">
+            <div class="alert">Create tha account</div>
+
+            <!-- Email -->
+            <div class="inputBox">
+                <!-- <span class="material-icons icon" >email</span> -->
+                <input type="text" placeholder="Username"  id="name"required>
+            </div>
+
+            <!-- Password -->
+            <div class="inputBox">
+                <!-- <span class="material-icons icon">lock</span> -->
+                <input type="number" placeholder="phonenumber" id="emailid" required>
+                <!-- <span class="material-icons eye">visibility_off</span> -->
+            </div>
+            <!-- <div class="inputBox">
+                <textarea id="msgContent" rows="5" placeholder="Message"></textarea>
+            </div> -->
+
+            <!-- Remember Me -->
+            <label class="remember">
+                <input type="checkbox">
+                <span>Remember me</span>
+            </label>
+
+            <!-- Sign Up Button -->
+              <div class="inputBo">
+            <button class="btn" type="submit">Sign up</button>
+            </div>
+
+        </form>
+        </div>
+
+        <!-- OR Divider -->
+        <div class="divider">
+            <span></span>
+            <p>or continue with</p>
+            <span></span>
+        </div>
+
+        
+
+        <!-- Sign in Link -->
+        <p class="signin-text">Already have an account? <a href="#" onclick="document.location='signin.html'">Sign in</a></p>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+   
+   <script>
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    
+    let username = document.getElementById("name").value;
+    let phone = document.getElementById("emailid").value;
+    
+    // Save username
+    localStorage.setItem("username", username);
+    
+    alert("Account created successfully!");
+    
+    // Redirect to home page
+    window.location.href = "home.html";
+    });
+    </script>
+
+    <script src="./mail.js"></script>
+
+
+</body>
+
+</html>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0f0f11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+.alert{
+    width: 100%;
+    background: rgb(0, 255, 106);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+    display: none;
+}
+.inputBox,#emailid-number::-webkit-inner-spin-button,
+.inputBox,#eamilid-number::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+}
+
+.containe {
+    width: 370px;
+    padding: 45px;
+    color: #fff;
+           border-radius: 45px;
+   box-shadow: 0 0 10px #c9a5ff;
+   
+    
+    height: 570px;
+}
+
+.back-btn {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+/* #eamilid{
+
+} */
+.inputBox {
+    position: relative;
+    background: #1c1c1f;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+}
+
+.inputBox input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.inputBox .icon,
+.inputBox .eye {
+    color: #bbb;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 20px;
+    color: #bbb;
+}
+
+.remember input {
+    width: 18px;
+    height: 18px;
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: #7b2ff7;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    color: #bbb;
+}
+
+.divider span {
+    flex: 1;
+    height: 1px;
+    background: #444;
+}
+
+.divider p {
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.social {
+    width: 55px;
+    height: 55px;
+    background: #1c1c1f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.social img {
+    width: 28px;
+}
+
+.signin-text {
+    text-align: center;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.signin-text a {
+    color: #9b50ff;
+    text-decoration: none;
+}
+</style>

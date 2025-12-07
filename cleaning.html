@@ -1,0 +1,230 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app">
+        <div class="header">
+            <i class="fa fa-arrow-left" onclick="document.location='home.html'"></i>
+        </div>
+
+        <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Cleaning" onkeyup="search()" id="search-item">
+        </div>
+
+        <!-- SERVICE CARDS -->
+        <div class="card"
+            onclick="saveBooking('Chantal Shelburne', 'Home Cleaning', '₹400', 'https://i.ibb.co/jwnN7ZG/cleaner1.png', 'muthubook1.html')">
+            <img src="https://i.ibb.co/jwnN7ZG/cleaner1.png" class="avatar">
+            <div class="card-content">
+                <p class="name">Chantal Shelburne</p>
+                <h3>Home Cleaning</h3>
+                <p class="price">₹400</p>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="saveBooking('Lauralee Quintero', 'Kitchen Cleaning', '₹300', 'https://i.ibb.co/d7FfTc6/cleaner2.png', 'muthubook2.html')">
+            <img src="https://i.ibb.co/d7FfTc6/cleaner2.png" class="avatar">
+            <div class="card-content">
+                <p class="name">Lauralee Quintero</p>
+                <h3>Kitchen Cleaning</h3>
+                <p class="price">₹300</p>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="saveBooking('Geoffrey Mott', 'Laundry Services', '₹300', 'https://i.ibb.co/zbbtS0P/cleaner3.png', 'muthubook3.html')">
+            <img src="https://i.ibb.co/zbbtS0P/cleaner3.png" class="avatar">
+            <div class="card-content">
+                <p class="name">Geoffrey Mott</p>
+                <h3>Laundry Services</h3>
+                <p class="price">₹300</p>
+            </div>
+        </div>
+
+        <div class="card"
+            onclick="saveBooking('Leatrice Handler', 'Window Cleaning', '₹400', 'https://i.ibb.co/kKYBwf3/cleaner4.png', 'muthubook4.html')">
+            <img src="https://i.ibb.co/kKYBwf3/cleaner4.png" class="avatar">
+            <div class="card-content">
+                <p class="name">Leatrice Handler</p>
+                <h3>Window Cleaning</h3>
+                <p class="price">₹400</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function search() {
+            const searchbox = document.getElementById("search-item").value.toUpperCase();
+            const cards = document.querySelectorAll(".card");
+
+            cards.forEach(card => {
+                const title = card.querySelector("h3").textContent.toUpperCase();
+                card.style.display = title.includes(searchbox) ? "" : "none";
+            });
+        }
+
+        function saveBooking(name, service, price, image, page) {
+            let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+            bookings.push({
+                name: name,
+                service: service,
+                price: price,
+                image: image,
+                status: "Upcoming"
+            });
+
+            localStorage.setItem("bookings", JSON.stringify(bookings));
+
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: #0f0f17;
+        padding: 20px;
+        color: white;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    .header i {
+        font-size: 20px;
+        color: white;
+    }
+
+    .app {
+        max-width: 420px;
+        margin: auto;
+    }
+
+    /* Search Box */
+    .search-box {
+        background: #1c1c27;
+        padding: 14px 18px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .search-box input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #eee;
+        font-size: 16px;
+    }
+
+    .search-box i {
+        color: #8b8b97;
+        font-size: 18px;
+    }
+
+    /* Results */
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 5px;
+        font-size: 16px;
+    }
+
+    .results-header span {
+        color: #b474ff;
+    }
+
+    .results-header .count {
+        color: #b474ff;
+    }
+
+    /* Card */
+    .card {
+        background: #1c1c27;
+        padding: 15px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+      
+        gap: 15px;
+        position: relative;
+    }
+
+    .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        object-fit: cover;
+    }
+
+    .card-content .name {
+        font-size: 12px;
+        opacity: 0.7;
+    }
+
+    .card-content h3 {
+        font-size: 18px;
+        margin: 4px 0;
+    }
+
+    .price {
+        color: #b474ff;
+        font-weight: 600;
+    }
+
+    .rating {
+        margin-top: 6px;
+        font-size: 13px;
+        opacity: 0.8;
+    }
+
+    .rating i {
+        color: gold;
+        margin-right: 4px;
+    }
+
+    /* Bookmark Icon */
+    .bookmark {
+        color: #b474ff;
+        font-size: 22px;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+</style>

@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Screen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="slider">
+
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                <h2>We provide <br> professional service <br> at a friendly price</h2>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                <h2>The best results <br> your satisfaction is <br> our top priority</h2>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="https://i.ibb.co/pKz7jNs/illustration.png" alt="">
+                <h2>Premium support <br> whenever you need us</h2>
+            </div>
+           
+
+        </div>
+
+        <button class="next-btn" onclick="document.location='logon.html'">Next</button>
+    </div>
+
+</body>
+
+</html>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0e0e0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 90vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 380px;
+    background: #1b1b1d;
+    padding: 25px;
+         /* background-color:#792099; */
+   border-radius: 45px;
+   box-shadow: 0 0 40px #c9a5ff; /* soft purple*/
+    border-radius: 35px;
+    text-align: center;
+    color: #fff;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: sliderMove 12s linear infinite;
+}
+
+.slide {
+    width: 300px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.slide img {
+    width: 95%;
+    margin-top: 20px;
+}
+
+.slide h2 {
+    margin-top: 20px;
+    font-size: 22px;
+    line-height: 30px;
+    color: #fff;
+}
+
+.next-btn {
+    width: 100%;
+    background: #a020f0;
+    padding: 14px;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    width: 80%;
+    margin: auto;
+    transition: 0.3s;
+}
+
+.next-btn:hover {
+    background: #b133ff;
+}
+
+@keyframes sliderMove {
+    0% { transform: translateX(0); }
+    33% { transform: translateX(-320px); }
+    66% { transform: translateX(-640px); }
+    100% { transform: translateX(0); }
+}
+</style>

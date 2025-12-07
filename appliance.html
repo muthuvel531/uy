@@ -1,0 +1,295 @@
+
+
+
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appliance</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<div class="app">
+<div class="header">
+    <i class="fa fa-arrow-left" onclick="document.location='home.html'"></i>
+    <!-- <h2>Repairing</h2>
+     -->
+</div>
+<div class="search-box">
+    <i class="fa fa-search"></i>
+    <input type="text" placeholder="Cleaning" onkeyup="search()" id="search-item">
+    <i class="fa fa-sliders"></i>
+</div>
+
+    <!-- Cards Container -->
+    <div class="cards">
+
+        <!-- CARD 1 -->
+        <div class="card">
+            <img src="https://i.ibb.co/3kH4Cfq/man1.png">
+            <div class="info">
+                <p class="name">Cameron Williamson</p>
+                <h3>Appliance Services</h3>
+                <span class="price">$26</span>
+
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <p>4.9 | 6,273 reviews</p>
+                </div>
+            </div>
+            <i class="fa-regular fa-bookmark bookmark"></i>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card">
+            <img src="https://i.ibb.co/6rmw94K/worker2.png">
+            <div class="info">
+                <p class="name">Thad Eddings</p>
+                <h3>Household Appliance</h3>
+                <span class="price">$22</span>
+
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <p>4.7 | 7,938 reviews</p>
+                </div>
+            </div>
+            <i class="fa-regular fa-bookmark bookmark"></i>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card">
+            <img src="https://i.ibb.co/N2V7HJy/woman1.png">
+            <div class="info">
+                <p class="name">Janetta Rotolo</p>
+                <h3>Appliance Services</h3>
+                <span class="price">$23</span>
+
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <p>4.9 | 6,182 reviews</p>
+                </div>
+            </div>
+            <i class="fa-regular fa-bookmark bookmark"></i>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card">
+            <img src="https://i.ibb.co/6NjxH7V/worker3.png">
+            <div class="info">
+                <p class="name">Geoffrey Mott</p>
+                <h3>Kitchen Appliance</h3>
+                <span class="price">$24</span>
+
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <p>4.9 | 6,182 reviews</p>
+                </div>
+            </div>
+            <i class="fa-regular fa-bookmark bookmark"></i>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="card">
+            <img src="https://i.ibb.co/6HnqX8P/man3.png">
+            <div class="info">
+                <p class="name">Roselle Ehrman</p>
+                <h3>Appliance Services</h3>
+                <span class="price">$25</span>
+
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <p>4.8 | 5,854 reviews</p>
+                </div>
+            </div>
+            <i class="fa-regular fa-bookmark bookmark"></i>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const search = () => {
+        const searchbox = document.getElementById("search-item").value.toUpperCase();
+        const product = document.querySelectorAll(".card");
+        const pname = document.getElementsByTagName("h3");
+
+        for (let i = 0; i < pname.length; i++) {
+            let match = product[i].getElementsByTagName("h3")[0];
+
+            if (match) {
+                let textvalue = match.textContent || match.innerHTML;
+
+                if (textvalue.toUpperCase().indexOf(searchbox) > -1) {
+                    product[i].style.display = "";
+                } else {
+                    product[i].style.display = "none";
+                }
+            }
+        }
+    };
+</script>
+
+
+</body>
+</html>
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0f0f17;
+    color: white;
+    padding: 20px;
+}
+.search-box {
+    background:  #1c1c27;
+    padding: 14px 18px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #eee;
+    font-size: 16px;
+}
+
+.search-box i {
+    color: #8b8b97;
+    font-size: 18px;
+}
+.app {
+    max-width: 420px;
+    margin: auto;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.header i {
+    font-size: 20px;
+}
+
+/* LIST */
+.list {
+    margin-top: 10px;
+}
+
+    
+
+/* Top Bar */
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.top h2 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.top i {
+    color: #fff;
+    font-size: 22px;
+} */
+
+/* Cards */
+.cards {
+    margin-top: 10px;
+}
+
+.card {
+    background:#1c1c27;
+    border-radius: 25px;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.card img {
+    width: 95px;
+    height: 95px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+}
+
+.name {
+    font-size: 13px;
+    color: #bcbcbc;
+}
+
+.card h3 {
+    color: #ffffff;
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.price {
+    color: #b033ff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.rating i {
+    color: #ffbb00;
+}
+
+.rating p {
+    font-size: 13px;
+    color: #bcbcbc;
+}
+
+.bookmark {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 20px;
+    color: #9b45ff;
+}
+</style>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repairing Services</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app">
+    <div class="header">
+        <i class="fa fa-arrow-left" onclick="document.location='home.html'"></i>
+        <!-- <h2>Repairing</h2>
+     -->
+    </div>
+
+        
+            <!-- Search Bar -->
+            <div class="search-box">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Cleaning" onkeyup="search()" id="search-item">
+                <i class="fa fa-sliders"></i>
+            </div>
+            <!-- Header -->
+           
+        <!-- SERVICE CARD LIST -->
+        <div class="list">
+
+            <!-- CARD 1 -->
+            <div class="card">
+                <img src="https://i.ibb.co/5G9n2hZ/man1.png">
+                <div class="info">
+                    <p class="name">Wade Warren</p>
+                    <h3>Car Repairing</h3>
+                    <p class="price">$24</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.6 | 5,287 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="card">
+                <img src="https://i.ibb.co/Hd2RbVk/man2.png">
+                <div class="info">
+                    <p class="name">Freida Varnes</p>
+                    <h3>Motorcycle Repairing</h3>
+                    <p class="price">$22</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.7 | 7,938 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card">
+                <img src="https://i.ibb.co/9GPLYcT/man3.png">
+                <div class="info">
+                    <p class="name">Rodolfo Goode</p>
+                    <h3>House Repairing</h3>
+                    <p class="price">$23</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.9 | 6,182 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="card">
+                <img src="https://i.ibb.co/jfRJ5Vv/man4.png">
+                <div class="info">
+                    <p class="name">Alfonzo Schuessler</p>
+                    <h3>Walls Repairing</h3>
+                    <p class="price">$24</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.9 | 6,182 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="card">
+                <img src="https://i.ibb.co/4Y4yZJt/man5.png">
+                <div class="info">
+                    <p class="name">Clinton Mcclure</p>
+                    <h3>Machine Repairing</h3>
+                    <p class="price">$25</p>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i> 4.6 | 4,098 reviews
+                    </div>
+                </div>
+                <i class="fa-regular fa-bookmark bookmark"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+      <script>
+        const search = () => {
+            const searchbox = document.getElementById("search-item").value.toUpperCase();
+            const product = document.querySelectorAll(".card");
+            const pname = document.getElementsByTagName("h3");
+
+            for (let i = 0; i < pname.length; i++) {
+                let match = product[i].getElementsByTagName("h3")[0];
+
+            if (match) {
+                let textvalue = match.textContent || match.innerHTML;
+
+                    if (textvalue.toUpperCase().indexOf(searchbox) > -1) {
+                product[i].style.display = "";
+                    } else {
+                product[i].style.display = "none";
+                    }
+                }
+            }
+        };
+    </script>
+
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0f0f17;
+    color: white;
+    padding: 20px;
+}
+.search-box {
+    background: #1c1c27;
+    padding: 14px 18px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #eee;
+    font-size: 16px;
+}
+
+.search-box i {
+    color: #8b8b97;
+    font-size: 18px;
+}
+.app {
+    max-width: 420px;
+    margin: auto;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.header i {
+    font-size: 20px;
+}
+
+/* LIST */
+.list {
+    margin-top: 10px;
+}
+
+/* CARD */
+.card {
+    background: #1c1c27;
+    padding: 18px;
+    border-radius: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    position: relative;
+}
+
+.card img {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+.info .name {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.info h3 {
+    font-size: 17px;
+    margin: 3px 0;
+}
+
+.price {
+    color: #b474ff;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.rating {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.rating i {
+    color: gold;
+    margin-right: 4px;
+}
+
+/* Bookmark */
+.bookmark {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 22px;
+    color: #b474ff;
+}
+</style>

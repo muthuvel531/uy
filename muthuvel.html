@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calendar</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2 class="header-title">
+            <span class="icon">📅</span> My Calendar
+        </h2>
+
+        <div class="calendar-box">
+            <div class="month-row">
+                <h3 id="month-year">December 2024</h3>
+                <div class="nav-btn">
+                    <span id="prev-month">◀</span>
+                    <span id="next-month">▶</span>
+                </div>
+            </div>
+
+            <div class="weekdays">
+                <span>Mo</span><span>Tu</span><span>We</span>
+                <span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+            </div>
+
+            <div id="calendar" class="days"></div>
+        </div>
+
+        <!-- <div class="section-title">
+            Service Booking (2) <span class="see-all">See All</span>
+        </div> -->
+        <div class="section-title">
+            Service Booking (<span id="booking-count">0</span>)
+            <span class="see-all" onclick="location.href='bookings.html'">See All</span>
+        </div>
+        
+        <div id="booking-list"></div>
+
+
+        <!-- Booking Cards -->
+        <!-- <div class="booking-card">
+            <img src="https://i.imgur.com/QW5LzMd.png">
+            <div class="details">
+                <h4>House Cleaning</h4>
+                <p>Jenny Wilson</p>
+                <span class="status">Upcoming</span>
+            </div>
+            <div class="chat-icon">💬</div>
+        </div>
+
+        <div class="booking-card">
+            <img src="https://i.imgur.com/OiZ8Q1f.png">
+            <div class="details">
+                <h4>Appliance Service</h4>
+                <p>Alex Nguyen</p>
+                <span class="status">Upcoming</span>
+            </div>
+            <div class="chat-icon">💬</div>
+        </div>
+
+    </div> -->
+
+    <!-- Bottom Navbar -->
+    <!-- <div class="bottom-nav">
+        <div class="nav-item">🏠<br>Home</div>
+        <div class="nav-item">📑<br>Bookings</div>
+        <div class="nav-item active">📆<br>Calendar</div>
+        <div class="nav-item">📩<br>Inbox</div>
+        <div class="nav-item">👤<br>Profile</div>
+    </div> -->
+
+    <script>
+        const calendar = document.getElementById("calendar");
+        const monthYear = document.getElementById("month-year");
+
+        let date = new Date();
+        let currentMonth = date.getMonth();
+        let currentYear = date.getFullYear();
+
+        // Render Calendar
+        function loadCalendar(month, year) {
+            calendar.innerHTML = "";
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const numDays = new Date(year, month + 1, 0).getDate();
+
+            monthYear.textContent =
+                `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+
+            // Correct shift for Monday-first calendar
+            const offset = (firstDay === 0 ? 6 : firstDay - 1);
+
+            // Empty boxes
+            for (let i = 0; i < offset; i++) {
+                calendar.innerHTML += `<div></div>`;
+            }
+
+            // Add Dates
+            for (let i = 1; i <= numDays; i++) {
+                const day = document.createElement("div");
+                day.textContent = i;
+
+                day.onclick = () => {
+                    document.querySelectorAll(".days div").forEach(d => d.classList.remove("selected"));
+                    day.classList.add("selected");
+                };
+
+                calendar.appendChild(day);
+            }
+        }
+
+        loadCalendar(currentMonth, currentYear);
+
+        // Month Navigation
+        document.getElementById("next-month").onclick = () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            loadCalendar(currentMonth, currentYear);
+        };
+
+        document.getElementById("prev-month").onclick = () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            loadCalendar(currentMonth, currentYear);
+        };
+    </script>
+<script>
+    function loadCalendarBookings() {
+        let list = document.getElementById("booking-list");
+        let count = document.getElementById("booking-count");
+
+        list.innerHTML = "";
+
+        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+        // Count upcoming only
+        let upcoming = bookings.filter(b => b.status === "Upcoming");
+        count.textContent = upcoming.length;
+
+        if (upcoming.length === 0) {
+            list.innerHTML = `<p style="opacity:0.6; margin-top:10px;">No upcoming bookings</p>`;
+            return;
+        }
+
+        // Print booking cards
+        upcoming.forEach((b, index) => {
+            let card = `
+                <div class="booking-card">
+                    <img src="${b.image}">
+                    <div class="details">
+                        <h4>${b.service}</h4>
+                        <p>${b.name}</p>
+                       
+                    </div>
+                  <div class="chat-icon"onclick="sendWhatsApp(${index})">WhatappMeassage</div>
+                </div>
+            `;
+            list.innerHTML += card;
+        });
+    }
+
+    // WhatsApp chat
+    function sendWhatsApp(i) {
+        let bookings = JSON.parse(localStorage.getItem("bookings"));
+        let b = bookings[i];
+
+        let message = `Hi! I want to talk about my booking:
+Service: ${b.service}
+Name: ${b.name}
+Price: ${b.price}`;
+
+        window.open("https://wa.me/916381893332?text=" + encodeURIComponent(message));
+    }
+
+    loadCalendarBookings();
+</script>
+
+</body>
+
+
+</html>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #0e0e0e;
+    color: #fff;
+}
+
+.container {
+    padding: 20px;
+    padding-bottom: 100px;
+}
+
+.header-title {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.calendar-box {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 20px;
+}
+.chat-icon{
+    background: #25D366;
+            color: white;
+            margin-bottom: 8px;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+}
+
+.month-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.month-row h3 {
+    font-size: 20px;
+}
+
+.nav-btn span {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 10px;
+    opacity: 0.6;
+}
+
+.weekdays span {
+    text-align: center;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 15px;
+}
+
+.days div {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.days div.selected {
+    background: #a259ff;
+    color: #fff;
+}
+
+.section-title {
+    margin: 20px 0 10px;
+    font-size: 18px;
+}
+
+.see-all {
+    float: right;
+    font-size: 14px;
+    color: #a259ff;
+}
+
+.booking-card {
+    background: #242424;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.booking-card img {
+    width: 65px;
+    height: 65px;
+    border-radius: 15px;
+}
+
+.details {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.details h4 {
+    font-size: 16px;
+}
+
+.details p {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.status {
+    background: #a259ff;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.chat-icon {
+    font-size: 22px;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1b1b1b;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav-item {
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.nav-item.active {
+    opacity: 1;
+    color: #a259ff;
+}
+</style>

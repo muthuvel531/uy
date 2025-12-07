@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+
+    <style>
+        body {
+            background: #1b1b1d;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        /* Responsive Container */
+        .containe {
+            width: 400px;
+            max-width: 420px;
+            margin: 20px auto;
+            padding: 20px;
+            color: #fff;
+            border-radius: 25px;
+            box-shadow: 0 0 15px #c9a5ff;
+            background: #1b1b1d;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            border-bottom: 2px solid #2a2a2d;
+        }
+
+        .tab {
+            background: none;
+            border: none;
+            padding: 8px 14px;
+            color: #888;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: white;
+            font-weight: 800;
+            font-size: 28px;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .empty {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+        }
+
+        .booking-card {
+            background: #222226;
+            padding: 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            width: 370px;
+        }
+
+        .service-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .details {
+            flex: 1;
+            padding-left: 12px;
+        }
+
+        .status {
+            background: #a259ff;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .actions button {
+            margin-top: 6px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* .btn-complete {
+            background: #27ae60;
+            color: white;
+        } */
+
+        .btn-cancel {
+            background: #e74c3c;
+            color: white;
+
+
+        }
+
+        .btn-msg {
+            background: #25D366;
+            color: white;
+            margin-bottom: 8px;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="containe">
+        <div class="header">
+            <h1>My Bookings</h1>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(event, 'upcoming')">Bookings</button>
+        </div>
+
+        <div id="upcoming" class="tab-content active"></div>
+        <!-- <div id="completed" class="tab-content"></div> -->
+        <div id="cancelled" class="tab-content"></div>
+    </div>
+
+    <script>
+        function switchTab(event, tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function loadBookings() {
+            const upcoming = document.getElementById("upcoming");
+            // const completed = document.getElementById("completed");
+            const cancelled = document.getElementById("cancelled");
+
+            upcoming.innerHTML = "";
+            // completed.innerHTML = "";
+            cancelled.innerHTML = "";
+
+            let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+            if (bookings.length === 0) {
+                upcoming.innerHTML = `<p class="empty">No bookings yet.</p>`;
+                return;
+            }
+
+            bookings.forEach((b, index) => {
+                let card = `
+                    <div class="booking-card">
+                        <img src="${b.image}" class="service-img">
+                        <div class="details">
+                            <h3>${b.service}</h3>
+                            <p>${b.name}</p>
+                            <p class="price">${b.price}</p>
+                        </div>
+                        <div class="actions">
+                            ${b.status === "Upcoming" ? `
+                                 <button class="btn-msg" onclick="sendWhatsApp(${index})">Message</button>
+                <button class="btn-cancel" onclick="markCancelled(${index})">Cancel</button>
+            ` : `<span class="status">${b.status}</span>`}
+                               
+                        </div>
+                    </div>
+                `;
+
+
+                if (b.status === "Upcoming") upcoming.innerHTML += card;
+                // if (b.status === "Completed") completed.innerHTML += card;
+                if (b.status === "Cancelled") cancelled.innerHTML += card;
+            });
+        }
+
+        // function markCompleted(i) {
+        //     let bookings = JSON.parse(localStorage.getItem("bookings"));
+        //     bookings[i].status = "Completed";
+        //     localStorage.setItem("bookings", JSON.stringify(bookings));
+        //     loadBookings();
+        // }
+
+        function markCancelled(i) {
+            let bookings = JSON.parse(localStorage.getItem("bookings"));
+            bookings[i].status = "Cancelled";
+            localStorage.setItem("bookings", JSON.stringify(bookings));
+            loadBookings();
+        }
+
+        window.onload = loadBookings;
+    </script>
+    <script>
+        function sendWhatsApp(i) {
+            let bookings = JSON.parse(localStorage.getItem("bookings"));
+            let b = bookings[i];
+
+            let message = `Hi, I want to talk about my booking:
+Service: ${b.service}
+Name: ${b.name}
+Price: ${b.price}`;
+
+            window.open("https://wa.me/916381893332?text=" + encodeURIComponent(message));
+        }
+    </script>
+
+</body> 
+
+ </html> 
+
+
+
+
+
+
+
